@@ -1,0 +1,122 @@
+{
+  "entities": [
+    {
+      "name": "Student",
+      "attributes": [
+        {
+          "name": "student_id",
+          "type": "key"
+        },
+        {
+          "name": "ssn",
+          "type": "key"
+        },
+        {
+          "name": "name",
+          "type": "composite",
+          "attributes": [
+            "first_name",
+            "middle_name",
+            "last_name"
+          ]
+        },
+        {
+          "name": "birthday",
+          "type": "composite",
+          "attributes": [
+            "month",
+            "date",
+            "year"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Course",
+      "attributes": [
+        {
+          "name": "course_id",
+          "type": "key"
+        },
+        {
+          "name": "name",
+          "type": "single-valued"
+        },
+        {
+          "name": "assigned_department",
+          "type": "single-valued"
+        }
+      ]
+    },
+    {
+      "name": "Department",
+      "attributes": [
+        {
+          "name": "department_code",
+          "type": "key"
+        },
+        {
+          "name": "name",
+          "type": "single-valued"
+        },
+        {
+          "name": "courses_offered",
+          "type": "multivalued"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "ENROLLED_IN",
+      "entities": [
+        "Student",
+        "Course"
+      ],
+      "participation": {
+        "Student": {
+          "min": 1,
+          "max": 100
+        },
+        "Course": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    {
+      "name": "REGISTERED_IN",
+      "entities": [
+        "Student",
+        "Department"
+      ],
+      "participation": {
+        "Student": {
+          "min": 1,
+          "max": 1000
+        },
+        "Department": {
+          "min": 1,
+          "max": 1000
+        }
+      }
+    },
+    {
+      "name": "BELONGS_TO",
+      "entities": [
+        "Course",
+        "Department"
+      ],
+      "participation": {
+        "Course": {
+          "min": 1,
+          "max": 50
+        },
+        "Department": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    }
+  ]
+}

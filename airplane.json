@@ -1,0 +1,110 @@
+{
+    "entities": [
+        {
+            "name": "Airplane",
+            "attributes": [
+                {
+                    "name": "id",
+                    "type": "key"
+                },
+                {
+                    "name": "name",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "manufacturer",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "model",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "year",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "capacity",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "registration",
+                    "type": "single-valued"
+                }
+            ]
+        },
+        {
+            "name": "Flight",
+            "attributes": [
+                {
+                    "name": "id",
+                    "type": "key"
+                },
+                {
+                    "name": "airplane_id",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "departure_time",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "arrival_time",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "departure_city",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "arrival_city",
+                    "type": "single-valued"
+                }
+            ]
+        },
+        {
+            "name": "Passenger",
+            "attributes": [
+                {
+                    "name": "id",
+                    "type": "key"
+                },
+                {
+                    "name": "flight_id",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "name",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "age",
+                    "type": "single-valued"
+                },
+                {
+                    "name": "gender",
+                    "type": "single-valued"
+                }
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "name": "BOOKED_ON",
+            "entities": [
+                "Passenger",
+                "Flight"
+            ],
+            "participation": {
+                "Passenger": {
+                    "min": 1,
+                    "max": 1
+                },
+                "Flight": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        }
+    ]
+}
