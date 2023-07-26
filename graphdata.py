@@ -1,40 +1,7 @@
 import json
-import openai
 
-# STEP 1: Natural language input to JSON file
-openai.api_key = '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'
+# This will be the file to produce a graph from a fixed format of JSON input, and convert the graph back to the original JSON object
 
-# Define the conversation context
-conversation = [
-    {"role": "system", "content": "You are a user requesting JSON file generation."},
-    {"role": "user", "content": ""},
-    {"role": "assistant", "content": "Sure! Please provide the details of your database design."},
-    # You can include additional conversation turns here if needed
-]
-
-# Function to generate the JSON file from natural language input
-def create_json_from_prompt(prompt):
-    # Update the user's prompt in the conversation
-    conversation[1]['content'] = prompt
-    
-    # Make an API call to ChatGPT
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=conversation
-    )
-    
-    # Extract the JSON file from the API response
-    json_output = None
-    for message in response['choices'][0]['message']['content']:
-        try:
-            json_output = json.loads(message)
-            break
-        except ValueError:
-            continue
-    
-    return json_output
-
-# STEP 2: Take that JSON file to output a graph data structure that prints out all the different node and edge types
 
 # Build relevant classes for graph
 class Node:
@@ -190,7 +157,7 @@ def graph_to_json(graph):
 
 
 # TESTS
-def test1(): # Test graph_to_json function
+def test1(): # Test create_graph_from_json and old graph_to_json function
     # Read JSON data from file
     with open("data.json", "r") as file:
         json_data = json.load(file)
@@ -203,5 +170,7 @@ def test1(): # Test graph_to_json function
     print("Converted JSON: \n")
     print(converted_json)
 
+def test2(): # Test new convert_graph_to_json function
+    return 0
 # Invoke the desired test(s)
 test1()
